@@ -1,0 +1,37 @@
+{
+    "cluster": {
+        "clusterId": "onos",
+        "node": {
+            "id": "{{ data.self.hostname_atomix }}",
+            "address": "{{ data.self.ip_atomix }}:5679"
+        },
+        "discovery": {
+            "type": "bootstrap",
+            "nodes": [
+                {% for node in data.atomix %}
+		        {
+		            id: "{{ node.hostname }}"
+		            address: "{{ node.ip }}:5679"      
+		        }{% if not loop.last %},{% endif %}{% endfor %}
+            ]
+        }
+    },
+    "managementGroup": {
+        "type": "raft",
+        "partitions": 1,
+        "members": [{% for node in data.atomix %}"{{ node.hostname }}"{% if not loop.last %},{% endif %}{% endfor %}],
+        "storage": {
+            "level": "disk"
+        }
+    },
+    "partitionGroups": {
+        "raft": {
+            "type": "raft",
+            "partitions": 3,
+            "members": [{% for node in data.atomix %}"{{ node.hostname }}"{% if not loop.last %},{% endif %}{% endfor %}],
+            "storage": {
+                "level": "disk"
+            }
+        }
+    }
+}

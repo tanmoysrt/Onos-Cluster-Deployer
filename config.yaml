@@ -1,0 +1,16 @@
+atomix_docker: atomix/atomix:3.1.12
+onos_docker: onosproject/onos:2.7.0
+
+self:
+  hostname_onos: onos-1
+  ip_onos: 192.168.0.102
+  hostname_atomix: atomix-1
+  ip_atomix: 192.168.0.102
+
+atomix:
+- hostname: atomix-1
+  ip: 192.168.0.102
+
+onos:
+- hostname: onos-1
+  ip: 192.168.0.102

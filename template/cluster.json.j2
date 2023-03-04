@@ -1,0 +1,17 @@
+{
+  "name": "onos",
+  "node": {
+    "id": "{{ data.self.hostname_onos }}",
+    "ip": "{{ data.self.ip_onos }}",
+    "port": 9876
+  },
+  "storage": [
+{% for node in data.atomix %}
+    {
+      "id": "{{ node.hostname }}",
+      "host": "{{ node.ip }}",
+      "port": 5679
+    }{% if not loop.last %},{% endif %}
+{% endfor %}
+  ]
+}

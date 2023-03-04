@@ -1,0 +1,24 @@
+version: "3"
+services:
+  {{ data.self.hostname_onos }}:
+      container_name: {{ data.self.hostname_onos }}
+      image: {{ data.onos_docker }}
+      ports:
+        - "6653:6653"
+        - "6640:6640"
+        - "9876:9876"
+        - "8181:8181"
+        - "8101:8101"
+      volumes:
+        - ./configuration/cluster.json:/root/onos/config/cluster.json
+      environment:
+        - ONOS_APPS=drivers,gui2,openflow,fwd
+
+  {{ data.self.hostname_atomix }}:
+    container_name: {{ data.self.hostname_atomix }}
+    image: {{ data.atomix_docker }}
+    ports:
+      - "5678:5678"
+      - "5679:5679"
+    volumes:
+      - ./configuration/atomix.conf:/opt/atomix/conf/atomix.conf

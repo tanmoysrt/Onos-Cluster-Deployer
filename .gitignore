@@ -1,0 +1,16 @@
+venv
+configurations
+variable.yml
+generate.spec
+
+# Distribution / packaging
+bin/
+build/
+develop-eggs/
+dist/
+eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
